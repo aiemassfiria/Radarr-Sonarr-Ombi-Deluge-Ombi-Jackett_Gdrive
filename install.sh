@@ -130,12 +130,13 @@ tar -xvzf Jackett.Binaries.*.tar.gz
 
 # Install Jackett systemd service
 sudo useradd -m -p $(openssl passwd -1 jackett) jackett
-sudo chown root:root -R "/root/Jackett"
+sudo chown jackett:jackett -R "/root/Jackett"
 sudo bash Jackett/install_service_systemd.sh
 
 # Update Jackett systemd service to use root user and group
 sudo sed -i 's/User=.*/User=root/g' /etc/systemd/system/jackett.service
 sudo sed -i 's/Group=.*/Group=root/g' /etc/systemd/system/jackett.service
+sudo chown root:root -R "/root/Jackett"
 
 # Reload systemd daemon
 sudo systemctl daemon-reload
